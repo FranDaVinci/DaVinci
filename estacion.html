@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 parcial de Javascript - Estación del año</title>
+    <script src="estacion.js"></script>
+</head>
+<body>
+    <script>
+        let dia, mes, anyo, estacion_actual, dia_dd="", mes_dd="";
+        let dia_usu, mes_usu, estacion_usu, dia_usu_dd, mes_usu_mm;
+        let dia_correcto;
+        let mes_correcto;
+
+        do{
+            dia_usu = parseInt(prompt("Introduce el día: "));
+            mes_usu = parseInt(prompt("Introduce el mes: "));
+
+            dia_correcto = 1;
+            mes_correcto = 1;
+
+            if((dia_usu<1)||(dia_usu>31)){
+               alert("dia incorrecto, vuelve a introducir un día");
+               dia_correcto=0;
+            }
+            if((mes_usu<1)||(mes_usu>12)){
+               alert("mes incorrecto, vuelve a introducir un mes");
+               mes_correcto=0;
+            }
+
+        }while((dia_correcto==0)||(mes_correcto==0))
+
+        estacion_usu = calcularEstacion(dia_usu,mes_usu);
+
+        if(dia_usu < 10)
+            dia_usu_dd = "0" + dia_usu;
+        else
+            dia_usu_dd = dia_usu;
+        
+        if(mes_usu < 10)
+            mes_usu_mm = "0" + mes_usu;
+        else
+            mes_usu_mm = mes_usu;
+        
+        document.write("<br>La fecha del usuario es: "+dia_usu_dd+"/"+mes_usu_mm+" y la estación que corresponde es: ",estacion_usu);
+        
+        let fecha = new Date();
+
+        dia = fecha.getDate();
+        mes = fecha.getMonth()+1;
+        anyo = fecha.getFullYear();
+       
+        dia = parseInt(dia);
+        mes = parseInt(mes);
+        anyo = parseInt(anyo);
+
+        estacion_actual = calcularEstacion(dia,mes);
+
+        if(dia < 10){
+             dia_dd = "0" + dia;
+        }else{
+            dia_dd = dia;
+        }
+         if(mes < 10){
+            mes_dd = "0" + mes;
+        }else{
+             mes_dd = mes;
+        }
+         document.write("<br>La fecha de hoy es: "+dia_dd+"/"+mes_dd+"/"+anyo+" y la estación es:  "+estacion_actual);
+
+    </script>
+</body>
+</html>

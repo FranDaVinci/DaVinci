@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 parcial de Javascript - Menú de Restaurante</title>
+</head>
+<body>
+    <h1>MENÚ DEL DÍA</h1>
+    <form name="form1">
+    <div>
+    <label for="l_plato1">Primer plato </label>
+    <select name="primer_plato">
+        <option value="" disabled selected>Elige primer plato</option>
+        <option value="10">Salmorejo 10€</option>
+        <option value="15">Ensalada 15€</option>
+        <option value="18">Queso curado 18€</option>
+    </select>
+    </div>
+    <br>
+    <div>
+    <label for="l_plato2">Segundo plato</label>
+    <select name="segundo_plato">
+        <option value="" disabled selected>Elige segundo plato</option>
+        <option value="25">Paella 25€</option>
+        <option value="20">Pollo asado 20€</option>
+        <option value="30">Solomillo 30€</option>
+    </select>  
+    </div>
+    <br>
+    <div>
+    <label for="l_postre">Postre</label>
+    <select name="postre">
+        <option value="" disabled selected>Elige postre</option>
+        <option value="8">Flan casero 8€</option>
+        <option value="9">Natillas caseras 9€</option>
+        <option value="5">Helado 5€</option>
+    </select>  
+   </div>
+   <br>
+   <input type="button" name="mostrar" value="Mostrar Pedido" onClick="mostrarPedido()">
+   <br>
+   <div>   
+    <h3>Pedido</h3>
+    <textarea id="pedido" name="pedido" cols="60" rows="3">
+    </textarea>
+    <br>
+    <input type="button" name="calcular" value="Calcular Total" onClick="calculoTotal()">
+    </div>
+    <hr>
+    <h3>Precio Total</h3>
+    Total sin iva: <input type="text" name="total_sin" readonly> Iva: <input type="text" name="iva" readonly> TOTAL A PAGAR: <input type="text" name="total_pagar" readonly>
+</form>
+<script>
+    function mostrarPedido(){
+        let p_plato = document.form1.primer_plato.selectedIndex;
+        let s_plato = document.form1.segundo_plato.selectedIndex;
+        let p_postre = document.form1.postre.selectedIndex;
+
+        if(p_plato == 0){
+            alert("Debe elegir un primer plato")
+            document.form1.primer_plato.focus();
+            }else if (s_plato == 0){
+                alert("Debe elegir un segundo plato")
+                document.form1.segundo_plato.focus();            
+            }else if(p_postre == 0){
+                alert("Debe elegir un postre")
+                document.form1.postre.focus();
+            }else{
+                
+            document.form1.pedido.value = "Primer plato: "+ document.form1.primer_plato.options[p_plato].text+"\nSegundo plato: "+ document.form1.segundo_plato.options[s_plato].text+"\nPostre: "+ document.form1.postre.options[p_postre].text;
+            }
+        }
+
+        function calculoTotal(){
+            let p_plato = document.form1.primer_plato.selectedIndex;
+            let s_plato = document.form1.segundo_plato.selectedIndex;
+            let p_postre = document.form1.postre.selectedIndex;
+            
+            let tot_sin = parseInt(document.form1.primer_plato.options[p_plato].value) + parseInt(document.form1.segundo_plato.options[s_plato].value) + parseInt(document.form1.postre.options[p_postre].value);
+
+            document.form1.total_sin.value = tot_sin;
+            document.form1.iva.value = tot_sin * 0.10;
+            document.form1.total_pagar.value = tot_sin + parseFloat(document.form1.iva.value);
+
+        }
+</script>
+
+</body>
+</html>
